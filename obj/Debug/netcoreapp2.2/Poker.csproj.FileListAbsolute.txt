@@ -1,0 +1,14 @@
+/Users/carlawsiaki/Desktop/Poker/bin/Debug/netcoreapp2.2/Poker.deps.json
+/Users/carlawsiaki/Desktop/Poker/bin/Debug/netcoreapp2.2/Poker.runtimeconfig.json
+/Users/carlawsiaki/Desktop/Poker/bin/Debug/netcoreapp2.2/Poker.runtimeconfig.dev.json
+/Users/carlawsiaki/Desktop/Poker/bin/Debug/netcoreapp2.2/Poker.dll
+/Users/carlawsiaki/Desktop/Poker/bin/Debug/netcoreapp2.2/Poker.pdb
+/Users/carlawsiaki/Desktop/Poker/obj/Debug/netcoreapp2.2/Poker.csprojAssemblyReference.cache
+/Users/carlawsiaki/Desktop/Poker/obj/Debug/netcoreapp2.2/Poker.csproj.CoreCompileInputs.cache
+/Users/carlawsiaki/Desktop/Poker/obj/Debug/netcoreapp2.2/Poker.AssemblyInfoInputs.cache
+/Users/carlawsiaki/Desktop/Poker/obj/Debug/netcoreapp2.2/Poker.AssemblyInfo.cs
+/Users/carlawsiaki/Desktop/Poker/obj/Debug/netcoreapp2.2/Poker.dll
+/Users/carlawsiaki/Desktop/Poker/obj/Debug/netcoreapp2.2/Poker.pdb
+/Users/carlawsiaki/Desktop/Poker/bin/Debug/netcoreapp2.2/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/Users/carlawsiaki/Desktop/Poker/bin/Debug/netcoreapp2.2/xunit.runner.reporters.netcoreapp10.dll
+/Users/carlawsiaki/Desktop/Poker/bin/Debug/netcoreapp2.2/xunit.runner.utility.netcoreapp10.dll
