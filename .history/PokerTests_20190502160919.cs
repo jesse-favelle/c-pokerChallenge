@@ -50,7 +50,7 @@ namespace PokerTests
             };
 
             testPoker.checkHand(players);
-            Assert.Equal(6, players.Max(x => x.HandRank));
+            Assert.Equal(6, players.Max(x => x.HandRank)); 
         }
 
 
@@ -65,22 +65,9 @@ namespace PokerTests
             };
 
             testPoker.checkHand(players);
-            Assert.Equal(5, players.Max(x => x.HandRank));
+            Assert.Equal(3, players.Max(x => x.HandRank));
 
-        }
 
-        [Fact]
-        public void TestIsHandStraight()
-        {
-            PokerGame testPoker = new PokerGame();
-
-            List<Player> players = new List<Player>
-            {
-                new Player { Name="Joe", Hand="2D, 3D, 4D, 5D, 6C"},
-            };
-
-            testPoker.checkHand(players);
-            Assert.Equal(4, players.Max(x => x.HandRank));
         }
 
         [Fact]
@@ -91,21 +78,6 @@ namespace PokerTests
             List<Player> players = new List<Player>
             {
                 new Player { Name="Joe", Hand="2D, 4D, 4D, 4S, 10D"},
-            };
-
-            testPoker.checkHand(players);
-            Assert.Equal(3, players.Max(x => x.HandRank));
-
-        }
-
-        [Fact]
-        public void TestIsHandTwoPair()
-        {
-            PokerGame testPoker = new PokerGame();
-
-            List<Player> players = new List<Player>
-            {
-                new Player { Name="Joe", Hand="2D, 2D, 4D, 4S, 10D"},
             };
 
             testPoker.checkHand(players);
@@ -143,60 +115,6 @@ namespace PokerTests
         }
 
         [Fact]
-        public void TestStraightFlushWinner()
-        {
-            PokerGame testPoker = new PokerGame();
-
-            List<Player> players = new List<Player>
-            {
-                new Player { Name="Joe", Hand="10D, JD, QD, KD, AD"},
-                new Player { Name="Bob", Hand="5C, 6C, 7C, 8C, 9C"}
-
-            };
-
-            testPoker.checkHand(players);
-            testPoker.checkWinner(players);
-            Player player = testPoker.sortWinners(players);
-            Assert.Equal("Joe", player.Name);
-        }
-
-        [Fact]
-        public void TestFourOfAKindWinner()
-        {
-            PokerGame testPoker = new PokerGame();
-
-            List<Player> players = new List<Player>
-            {
-                new Player { Name="Joe", Hand="KD, KD, KD, KD, AD"},
-                new Player { Name="Bob", Hand="JC, JC, JC, JC, 9C"}
-
-            };
-
-            testPoker.checkHand(players);
-            testPoker.checkWinner(players);
-            Player player = testPoker.sortWinners(players);
-            Assert.Equal("Joe", player.Name);
-        }
-
-        [Fact]
-        public void TestFullHouseWinner()
-        {
-            PokerGame testPoker = new PokerGame();
-
-            List<Player> players = new List<Player>
-            {
-                new Player { Name="Joe", Hand="KD, KD, KD, JD, JD"},
-                new Player { Name="Bob", Hand="QC, QC, QD, AC, AC"}
-
-            };
-
-            testPoker.checkHand(players);
-            testPoker.checkWinner(players);
-            Player player = testPoker.sortWinners(players);
-            Assert.Equal("Joe", player.Name);
-        }
-
-        [Fact]
         public void TestFlushWinner()
         {
             PokerGame testPoker = new PokerGame();
@@ -215,23 +133,22 @@ namespace PokerTests
         }
 
         [Fact]
-        public void TestStraightWinner()
+        public void TestFourOfAKindWinner()
         {
             PokerGame testPoker = new PokerGame();
 
             List<Player> players = new List<Player>
             {
-                new Player { Name="Joe", Hand="2D, 3D, 4D, 5D, 6C"},
-                new Player { Name="Bob", Hand="7C, 8D, 9H, 10S, JD"}
+                new Player { Name="Joe", Hand="2D, 10D, 10C, 10D, 10D"},
+                new Player { Name="Bob", Hand="5C, 7D, 8H, 9S, QD"}
 
             };
 
             testPoker.checkHand(players);
             testPoker.checkWinner(players);
             Player player = testPoker.sortWinners(players);
-            Assert.Equal("Bob", player.Name);
+            Assert.Equal(7, player.HandRank);
         }
-
 
         [Fact]
         public void TestThreePairWinner()

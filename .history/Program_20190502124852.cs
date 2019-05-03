@@ -21,8 +21,9 @@ namespace Poker
         
             List<Player> players = new List<Player>
             {
-                 new Player { Name="Joe", Hand="10D, JD, QD, KD, AD"},
-                new Player { Name="Bob", Hand="5C, 6C, 7C, 8C, 9C"}
+                new Player { Name="Joe", Hand="4H, 4D, 10C, 10D, 10H"},
+                new Player { Name="Bob", Hand="3C, 4D, 10H, 10S, 4D"},
+                new Player { Name="Sally", Hand="2C, 4D, 5S, 10C, JH"}
             };
 
             myPokerGame.checkHand(players);

@@ -30,12 +30,8 @@ public class PokerGame
         {
             playerHand = convertToCards(Player.Hand);
 
-            if (IsStraight(playerHand, Player)) continue;
-            if (IsFourOfAKind(playerHand, Player)) continue;
-            if (IsFullHouse(playerHand, Player)) continue;
             if (IsFlush(playerHand, Player)) continue;
             if (IsThreeOfAKind(playerHand, Player)) continue;
-            if (isTwoPair(playerHand, Player)) continue;
             if (IsPair(playerHand, Player)) continue;
 
             //Check for High Card winner
@@ -47,45 +43,6 @@ public class PokerGame
         }
 
         return players;
-    }
-
-    private bool IsFourOfAKind(List<Card> playerHand, Player Player)
-    {
-        //group hand by value and check if 4 of the same count
-        var query = from card in playerHand
-                    group card by card.Value into cards
-                    where cards.Count() == 4
-                    select new { Value = cards.Key, Count = cards.Count() };
-
-        if (query.Count() == 1)
-        {
-            Player.HandRank = 7;
-            Player.Total = query.First().Value * 4;
-            //Store high cards that aren't part of the 3 of a kind
-            Player.HighCard1 = playerHand.OrderByDescending(x => x.Value).Where(x => x.Value * 4 != Player.Total).First().Value;
-            return true;
-        }
-        return false;
-    }
-
-    private bool IsFullHouse(List<Card> playerHand, Player Player)
-    {
-        //group hand by value and check if 4 of the same count
-        var query = from card in playerHand
-                    orderby card.Value descending
-                    group card by card.Value into cards
-                    select new { Value = cards.Key, Count = cards.Count() };
-
-        if (query.Count() == 2)
-        {
-            Player.HandRank = 6;
-            Player.HighCard1 = query.Where(x => x.Count == 3).First().Value * 3; 
-            Player.HighCard2 = query.Where(x => x.Count == 2).First().Value * 2;
-            return true;
-        }
-
-        return false;
-
     }
 
     private bool IsFlush(List<Card> playerHand, Player Player)
@@ -110,22 +67,25 @@ public class PokerGame
         return false;
     }
 
-    private bool IsStraight(List<Card> playerHand, Player Player)
+    private bool IsFourOfAKind(List<Card> playerHand, Player Player)
     {
-        var cards = playerHand.OrderByDescending(x => x.Value).ToList();
-        if (cards.Max(x => x.Value) - cards.Min(x => x.Value) == 4)
+        //group hand by value and check if 4 of the same count
+        var query = from card in playerHand
+                    group card by card.Value into cards
+                    where cards.Count() == 4
+                    select new { Value = cards.Key, Count = cards.Count() };
+
+        if (query.Count() == 1)
         {
-            if (IsFlush(playerHand, Player))
-            {
-                Player.HandRank = 8;
-                return true;
-            }
-            Player.HandRank = 4;
-            Player.HighCard1 = cards.First().Value;
+            Player.HandRank = 7;
+            Player.Total = query.First().Value * 4;
+            //Store high cards that aren't part of the 3 of a kind
+            Player.HighCard1 = playerHand.OrderByDescending(x => x.Value).Where(x => x.Value * 4 != Player.Total).First().Value;
             return true;
         }
 
         return false;
+
     }
 
     private bool IsThreeOfAKind(List<Card> playerHand, Player Player)
@@ -154,7 +114,6 @@ public class PokerGame
     {
 
         var query = from card in playerHand
-                    orderby card.Value descending
                     group card by card.Value into cards
                     where cards.Count() == 2
                     select new { Value = cards.Key, Count = cards.Count() };
@@ -162,7 +121,8 @@ public class PokerGame
         if (query.Count() == 2)
         {
             Player.HandRank = 2;
-            Player.Total = query.First().Value * 2 + query.Last().Value * 2;
+            Player.Total = query.OrderByDescending(x => x.Value).First().Value * 2;
+            Player.HighCard1 = playerHand.OrderByDescending(x => x.Value).Where(x => x.Value * 2 != Player.Total).First().Value;
 
             return true;
         }

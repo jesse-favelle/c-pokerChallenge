@@ -80,7 +80,7 @@ public class PokerGame
         {
             Player.HandRank = 6;
             Player.HighCard1 = query.Where(x => x.Count == 3).First().Value * 3; 
-            Player.HighCard2 = query.Where(x => x.Count == 2).First().Value * 2;
+            Player.HighCard2 = query.Where(x => x.Count ==2).First().Value * 2;
             return true;
         }
 

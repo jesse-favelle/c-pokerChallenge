@@ -229,7 +229,7 @@ namespace PokerTests
             testPoker.checkHand(players);
             testPoker.checkWinner(players);
             Player player = testPoker.sortWinners(players);
-            Assert.Equal("Bob", player.Name);
+            Assert.Equal("Joe", player.Name);
         }
 
 

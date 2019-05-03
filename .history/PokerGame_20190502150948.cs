@@ -30,10 +30,12 @@ public class PokerGame
         {
             playerHand = convertToCards(Player.Hand);
 
-            if (IsStraight(playerHand, Player)) continue;
+            if (IsRoyalFlush(playerHand, Player)) continue;
+            if (IsStraightFlush(playerHand, Player)) continue;
             if (IsFourOfAKind(playerHand, Player)) continue;
             if (IsFullHouse(playerHand, Player)) continue;
             if (IsFlush(playerHand, Player)) continue;
+            if (IsStraight(playerHand, Player)) continue;
             if (IsThreeOfAKind(playerHand, Player)) continue;
             if (isTwoPair(playerHand, Player)) continue;
             if (IsPair(playerHand, Player)) continue;
@@ -47,6 +49,16 @@ public class PokerGame
         }
 
         return players;
+    }
+
+    private bool IsRoyalFlush(List<Card> playerHand, Player Player)
+    {
+
+    }
+
+    private bool IsStraightFlush(List<Card> playerHand, Player Player)
+    {
+        
     }
 
     private bool IsFourOfAKind(List<Card> playerHand, Player Player)
@@ -65,7 +77,9 @@ public class PokerGame
             Player.HighCard1 = playerHand.OrderByDescending(x => x.Value).Where(x => x.Value * 4 != Player.Total).First().Value;
             return true;
         }
+
         return false;
+
     }
 
     private bool IsFullHouse(List<Card> playerHand, Player Player)
@@ -79,8 +93,7 @@ public class PokerGame
         if (query.Count() == 2)
         {
             Player.HandRank = 6;
-            Player.HighCard1 = query.Where(x => x.Count == 3).First().Value * 3; 
-            Player.HighCard2 = query.Where(x => x.Count == 2).First().Value * 2;
+            Player.Total = query.First().Value * 3 + query.Last().Value * 2;
             return true;
         }
 
@@ -88,7 +101,7 @@ public class PokerGame
 
     }
 
-    private bool IsFlush(List<Card> playerHand, Player Player)
+       private bool IsFlush(List<Card> playerHand, Player Player)
     {
         //group hand to check all same suit
         var query = from card in playerHand
@@ -113,13 +126,7 @@ public class PokerGame
     private bool IsStraight(List<Card> playerHand, Player Player)
     {
         var cards = playerHand.OrderByDescending(x => x.Value).ToList();
-        if (cards.Max(x => x.Value) - cards.Min(x => x.Value) == 4)
-        {
-            if (IsFlush(playerHand, Player))
-            {
-                Player.HandRank = 8;
-                return true;
-            }
+        if(cards.Max(x => x.Value) - cards.Min(x => x.Value) == 4) {
             Player.HandRank = 4;
             Player.HighCard1 = cards.First().Value;
             return true;
